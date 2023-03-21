@@ -1,0 +1,9 @@
+Package: sudo-ldap
+Version: 99:99
+Maintainer: I-LeCorbeau <I-LeCorbeau (at) protonmail (dot) com>
+Architecture: all
+Description: dummy package for sudo
+ Ragnarok uses doas. This exists to prevent live-build
+ from installing sudo-ldap. Sudo can still be installed
+ by the user later by first doing apt remove sudo-ldap
+ then apt install sudo-ldap.
