@@ -1,21 +1,21 @@
 #!/bin/sh
 
-PKG_NAME="base-passwd"
+PKG_NAME="base-files"
 
 # Fetch the source, install build dependencies and copy the control/changelog files.
 prepare() {
 	apt-get source "$PKG_NAME"
 	apt-get build-dep "$PKG_NAME"
-	cp ragnarok/control "$PKG_NAME"-*/debian/
-	cp ragnarok/changelog "$PKG_NAME"-*/debian/
+	cp control "$PKG_NAME"-*/debian/
+	cp changelog "$PKG_NAME"-*/debian/
 }
 
 # Apply patches, if there are any.
 do_patch() {
-	for _file in ragnarok/*.diff; do
+	for _file in patches/*.diff; do
 		if [ -f "$_file" ]; then
 			cd "$PKG_NAME"-* && \
-				for _patch in ../ragnarok/*.diff; do patch -p1 < "$_patch"; done && \
+				for _patch in ../patches/*.diff; do patch -p1 < "$_patch"; done && \
 					cd ..
 		fi
 	done
@@ -32,21 +32,14 @@ do_build() {
 do_update() {
 	prepare
 	cd "$PKG_NAME"-* && dch -n && cd ..
-	cp "$PKG_NAME"-*/debian/changelog ragnarok/
-	cp "$PKG_NAME"-*/debian/control ragnarok/
+	cp "$PKG_NAME"-*/debian/changelog .
+	cp "$PKG_NAME"-*/debian/control .
 	do_patch
 	cd "$PKG_NAME"-* && debuild -i -us -uc -b && cd ..
 }
 
-# Move all deb/udeb packages to a directory named pkgs
-mvpkg() {
-	mkdir -p ../pkgs
-	for _pkg in *.deb; do mv "$_pkg" ../pkgs/; done
-}
-
 # Clean the directory.
 cleanup() {
-	mvpkg
 	rm -rf "$PKG_NAME"-*
 	for _file in "$PKG_NAME"_*; do rm "$_file"; done
 }
