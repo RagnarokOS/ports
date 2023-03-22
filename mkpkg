@@ -22,14 +22,10 @@
 
 # Script to automatically build/update the packages in the source tree.
 
-# Global variables
-
 usage() {
 	printf '%s\n' "
 Build or update one or more package. Valid options:
 
--a	create a tar.gz archive of the ports tree. If /path/to/sec_key is
-	given as argument 1, then the archive will be signed with signify.
 -b	build package(s)
 -h	print this help message
 -s	sign package(s) with signify
@@ -92,30 +88,12 @@ sign_pkgs() {
 	/usr/bin/cat SHA256 >> SHA256.sig
 }
 
-# Create a tarball of ports tree then sign with signify.
-mktar() {
-	_key="$1"
-
-	# Create the tarball
-	bsdtar czf /home/"$USER"/ports.tar.gz .
-
-	# Sign the tarball if a path to security key was provided
-	if [ -z "$1" ]; then
-		:	# don't do anything
-	else
-		signify-openbsd -S -s "$_key" -m /home/"$USER"/ports.tar.gz -x /home/"$USER"/ports.tar.gz.sig
-	fi
-
-}
-
 # Let's go
 TARGET="/usr/packages"
 SEC_KEY=
 
-while getopts abhus:t: args; do
+while getopts bhus:t: args; do
 	case "$args" in
-		a)	KEY="$OPTARG"
-			mktar "$KEY" ;;
 		b)	build_pkg "$@" ;;
 		h)	usage ;;
 		s) 	SEC_KEY="$OPTARG"
