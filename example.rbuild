@@ -7,6 +7,10 @@
 # Name of the package
 PKG_NAME=""
 
+# Package's version. If the source is from Debian, make sure to verify
+# the version number properly.
+VERSION=""
+
 # Where the source is fetched. This can be "debian", in which case the
 # source will be fetched using apt-get source <package-name>, or a url
 # to the source's tarball (e.g. in github releases).
@@ -37,6 +41,19 @@ prepare() {
 	# to the package's source. For example, if the only modification
 	# to a source package is a simple word in its Makefile, creating
 	# a patch for it would be rather pointless.
+}
+
+# Build the package
+do_build() {
+	# Debian provides various commands to build a package, e.g.
+	# debuild, dpkg-buildpackage. Each has their own options
+	# that may or may not be needed. It's better to have each
+	# individual port use its own command rather than handling
+	# it in the mkpkg script. 
+	#
+	# When in doubt, use the standard command:
+	#
+	# debuild -i -us -uc -b
 }
 
 # Cleaning after the package was built
