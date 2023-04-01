@@ -48,11 +48,43 @@ Update and sign a single package:
 "
 }
 
+get_src() {
+	local _src="$1"
+	
+	if [[ "$SRC" = debian ]]; then
+		apt-get source "$_src"
+	else
+		printf '%s\n' "Fetching source..."
+		/usr/bin/wget "$SRC" -q --show-progress
+		extract "$SRC"
+	fi
+}
+
+get_builddeps() {
+	local _cmd _src="$1"
+
+	if command -v /usr/bin/doas >/dev/null 2>&1; then
+		_cmd="doas"
+	else
+		_cmd="sudo"
+	fi
+
+	mk-build-deps --install --root-cmd "$_cmd" "$_src"
+}
+
+do_patch() {
+	local _patches
+
+	set -A _patches -- patches/"$PATCHES"
+
+	for _file in "${_patches[@]}"; do
+		patch -d "$PKG_NAME"-"$VERSION" < "$_file"
+	done
+}
+
 # Building packages by cd'ing into dir and running their build script.
 build_pkg() {
 	local _pkgs
-
-	mkdir -p "$TARGET"
 
 	shift
 	if [ $# -eq 0 ]; then
@@ -64,11 +96,28 @@ build_pkg() {
 	fi
 
 	for pkg in "${_pkgs[@]}"; do
-		cd "$pkg" && \
-			chmod +x r-build && \
-			./r-build && \
-			mv -- *.deb ../ && \
-			cd ..
+		cd "$pkg" || exit
+		. "$(pwd)"/"$pkg".rbuild
+		echo "Fetching source..."
+		get_src "$pkg"
+		echo "getting build depends..."
+		get_builddeps "$pkg"
+		echo "$pkg"
+		echo "patching..."
+		[[ -n "$PATCHES" ]] && do_patch "$pkg"
+		echo "Preparing..."
+		if typeset -f prepare > /dev/null; then
+			prepare
+		fi
+		cd "$PKG_NAME"-"$VERSION" || exit
+		echo "Building..."
+		do_build
+		echo "Cleaning up..."
+		clean
+		cd ..
+		cd ..
+		echo "moving package to TARGET"
+		mv -- *.deb "$TARGET"
 	done
 
 }
@@ -89,8 +138,11 @@ sign_pkgs() {
 }
 
 # Let's go
-TARGET="/usr/packages"
+TARGET="/home/$USER/.local/src/packages"
 SEC_KEY=
+
+# Making sure TARGET exists
+mkdir -p "$TARGET"
 
 while getopts bhus:t: args; do
 	case "$args" in
