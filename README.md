@@ -19,10 +19,10 @@ mentionned above. e.g.
 *
 
 # except these files
+!<package-name>.rbuild
 !.gitignore
 !changelog
 !control
-!r-build
 !patches/
 !patches/*
 ```
