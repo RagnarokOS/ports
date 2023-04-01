@@ -3,8 +3,8 @@
 
 # Except these files
 !.gitignore
+!base-files.rbuild
 !changelog
 !control
-!r-build
 !patches/
 !patches/*
