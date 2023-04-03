@@ -5,7 +5,7 @@
 !.gitignore
 !changelog
 !control
-!r-build
 !patches/
 !patches/*
 !postinst
+!signify.rbuild
