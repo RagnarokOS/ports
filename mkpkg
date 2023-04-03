@@ -112,8 +112,8 @@ build_pkg() {
 		cd "$PKG_NAME"-"$VERSION" || exit
 		echo "Building..."
 		do_build
-		echo "Cleaning up..."
-		clean
+		# echo "Cleaning up..."
+		# do_clean
 		cd ..
 		cd ..
 		echo "moving package to TARGET"
