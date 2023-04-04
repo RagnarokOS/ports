@@ -1,7 +1,5 @@
-adduser
 base-files
 base-passwd
 hardened_malloc
 oksh
 signify
-util-linux
