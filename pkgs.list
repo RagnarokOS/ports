@@ -1,5 +1,4 @@
 base-files
-base-passwd
-hardened_malloc
+hardened-malloc
 oksh
 signify
