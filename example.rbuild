@@ -11,9 +11,12 @@ PKG_NAME=""
 # the version number properly.
 VERSION=""
 
-# Where the source is fetched. This can be "debian", in which case the
-# source will be fetched using apt-get source <package-name>, or a url
-# to the source's tarball (e.g. in github releases).
+# Where the source is fetched. Valid arguments: debian, git or a url to
+# a release tarball.
+# If "debian" is used, the source will be fetched from the debian repos.
+# If "git", the repository will be cloned.
+# If a url is used, it will be downloaded with wget.
+# NOTE: git should only be chosen if the other two options are not available.
 SRC=""
 
 # A whitespace or new-line separated list of patches to apply, if any
