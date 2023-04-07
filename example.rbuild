@@ -19,6 +19,10 @@ VERSION=""
 # NOTE: git should only be chosen if the other two options are not available.
 SRC=""
 
+# If SRC is a repo to be cloned, add the url here. Otherwise, don't include
+# the variable.
+GIT_SRC=""
+
 # A whitespace or new-line separated list of patches to apply, if any
 # are present. Patches should be listed in the order in which they are
 # to be applied.

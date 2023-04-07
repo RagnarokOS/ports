@@ -54,7 +54,7 @@ get_src() {
 	if [[ "$SRC" = debian ]]; then
 		apt-get source "$_src"
 	elif [[ "$SRC" = git ]]; then
-		git clone "$SRC"
+		git clone "$GIT_SRC"
 	else
 		printf '%s\n' "Fetching source..."
 		/usr/bin/wget "$SRC" -q --show-progress
