@@ -1,4 +1,7 @@
 base-files
 hardened-malloc
+no-libsystemd0
+no-mandb
+no-sudo-ldap
 oksh
 signify

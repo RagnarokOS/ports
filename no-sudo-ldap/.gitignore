@@ -5,4 +5,4 @@
 !.gitignore
 !README.md
 !no-sudo-ldap.equivs
-!r-build
+!no-sudo-ldap.rbuild

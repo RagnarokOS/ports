@@ -4,4 +4,4 @@
 # Except these files
 !.gitignore
 !no-mandb.equivs
-!r-build
+!no-mandb.rbuild
