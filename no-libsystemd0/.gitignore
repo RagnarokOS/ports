@@ -4,4 +4,4 @@
 # Except these files
 !.gitignore
 !no-libsystemd0.equivs
-!r-build
+!no-libsystemd0.rbuild

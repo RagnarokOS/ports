@@ -100,24 +100,35 @@ build_pkg() {
 	for pkg in "${_pkgs[@]}"; do
 		cd "$pkg" || exit
 		. "$(pwd)"/"$pkg".rbuild
+		# If there's no SRC variable, then this is an equivs
+		# hosted in the ports tree, so only run get_src() if
+		# the variable is set.
 		echo "Fetching source..."
-		get_src "$pkg"
+		[[ -n "$SRC" ]] && get_src "$pkg"
+		
+		# Likewise, only get the build deps if SRC is set.
 		echo "getting build depends..."
-		get_builddeps "$pkg"
-		echo "$pkg"
+		[[ -n "$SRC" ]] && get_builddeps "$pkg"
+		
 		echo "patching..."
 		[[ -n "$PATCHES" ]] && do_patch "$pkg"
+		
 		echo "Preparing..."
 		if typeset -f prepare > /dev/null; then
 			prepare
 		fi
+		
 		cd "$PKG_NAME"-"$VERSION" || exit
+		
 		echo "Building..."
 		do_build
+		
 		# echo "Cleaning up..."
 		# do_clean
 		cd ..
+		
 		cd ..
+		
 		echo "moving package to TARGET"
 		mv -- *.deb "$TARGET"
 	done
