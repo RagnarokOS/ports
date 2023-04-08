@@ -1,6 +1,7 @@
 PKG_NAME="hardened-malloc"
 VERSION="11"
-SRC=""	# Release not ready yet.
+SRC="git"
+GIT_SRC="https://github.com/RagnarokOS/hardened-malloc.git"
 
 # Build
 do_build() {
