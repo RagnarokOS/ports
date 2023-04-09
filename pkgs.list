@@ -3,5 +3,6 @@ hardened-malloc
 no-libsystemd0
 no-mandb
 no-sudo-ldap
+ragnarok-files
 oksh
 signify
