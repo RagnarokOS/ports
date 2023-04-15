@@ -3,7 +3,8 @@
 # Self-explanatory
 PKG="oksh"
 VERSION="7.2"
-SRC="https://github.com/I-LeCorbeau/oksh/releases/download/$VERSION/oksh-$VERSION.tar.gz"
+SRC="git"
+GIT_SRC="https://github.com/RagnarokOS/oksh.git"
 
 # Build the package
 do_build() {
