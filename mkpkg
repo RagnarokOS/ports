@@ -80,7 +80,7 @@ do_patch() {
 	set -A _patches -- patches/"$PATCHES"
 
 	for _file in "${_patches[@]}"; do
-		patch -d "$PKG_NAME"-"$VERSION" < "$_file"
+		patch -d "$PKG_NAME"-"$VERSION" -p1 < "$_file"
 	done
 }
 
