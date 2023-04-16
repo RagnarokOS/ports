@@ -71,7 +71,7 @@ get_builddeps() {
 		_cmd="sudo"
 	fi
 
-	mk-build-deps --install --root-cmd "$_cmd" "$_src"
+	mk-build-deps --install --root-cmd "$_cmd" "${PKG_NAME}"-"${VERSION}"/debian/control
 }
 
 do_patch() {
@@ -108,7 +108,7 @@ build_pkg() {
 		
 		# Likewise, only get the build deps if SRC is set.
 		echo "getting build depends..."
-		[[ -n "$SRC" ]] && get_builddeps "$pkg"
+		[[ -n "$SRC" ]] && get_builddeps
 		
 		echo "patching..."
 		[[ -n "$PATCHES" ]] && do_patch "$pkg"
