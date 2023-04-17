@@ -4,7 +4,3 @@
 # Except these files
 !.gitignore
 !base-files.rbuild
-!changelog
-!control
-!patches/
-!patches/*
