@@ -105,18 +105,18 @@ build_pkg() {
 		# the variable is set.
 		echo "Fetching source..."
 		[[ -n "$SRC" ]] && get_src "$pkg"
-		
-		# Likewise, only get the build deps if SRC is set.
-		echo "getting build depends..."
-		[[ -n "$SRC" ]] && get_builddeps
-		
+	
 		echo "patching..."
 		[[ -n "$PATCHES" ]] && do_patch "$pkg"
-		
+
 		echo "Preparing..."
 		if typeset -f prepare > /dev/null; then
 			prepare
 		fi
+		
+		# Likewise, only get the build deps if SRC is set.
+		echo "getting build depends..."
+		[[ -n "$SRC" ]] && get_builddeps
 		
 		cd "$PKG_NAME"-"$VERSION" || exit
 		
