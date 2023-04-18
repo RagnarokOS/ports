@@ -1,6 +1,6 @@
 # Self-explanatory
 PKG="oksh"
-VERSION="7.2"
+VERSION="7.3"
 SRC="git"
 GIT_SRC="https://github.com/RagnarokOS/oksh.git"
 
