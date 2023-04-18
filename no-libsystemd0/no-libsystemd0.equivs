@@ -1,9 +1,0 @@
-Package: libsystemd0
-Version: 999:99
-Maintainer: Ian LeCorbeau <I-LeCorbeau (at) protonmail (dot) com>
-Architecture: all
-Description: dummy libsystemd0 package
-  Certain packages have a hard dependecy on libsystemd0
-  so we need a dummy package to make sure it won't get
-  installed nor prevent the installation/upgrade of these
-  packages.

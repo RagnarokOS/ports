@@ -1,7 +1,0 @@
-# Ignore everything
-*
-
-# Except these files
-!.gitignore
-!no-libsystemd0.equivs
-!no-libsystemd0.rbuild
