@@ -1,6 +1,0 @@
-#!/bin/sh
-
-set -e
-
-# This will symlink signify-openbsd to signify for convenience.
-ln -sf /usr/bin/signify-openbsd /usr/bin/signify
