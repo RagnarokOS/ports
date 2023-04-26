@@ -1,4 +1,5 @@
 base-files
+bash
 hardened-malloc
 no-mandb
 no-sudo-ldap
