@@ -15,7 +15,7 @@ prepare() {
 	printf '%s\n' "
 # source ~/.aliases if it exists
 if [ -f ~/.aliases ]; then
-. ~/.aliases
+	. ~/.aliases
 fi" >> "$PKG_NAME"-"$VERSION"/debian/skel.bashrc
 	
 	# Now, generate new changelog
