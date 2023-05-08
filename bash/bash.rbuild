@@ -10,6 +10,13 @@ prepare() {
 	# from ragnarok-files is the one that matters.
 	rm "$PKG_NAME"-"$VERSION"/debian/skel.profile
 	sed -i '/skel\.profile/d' "$PKG_NAME"-"$VERSION"/debian/rules
+
+	# Handling the .aliases file
+	printf '%s\n' "
+# source ~/.aliases if it exists
+if [ -f ~/.aliases ]; then
+. ~/.aliases
+fi" >> "$PKG_NAME"-"$VERSION"/debian/skel.bashrc
 	
 	# Now, generate new changelog
 	cd "$PKG_NAME"-"$VERSION" && dch -n && cd ..
