@@ -19,7 +19,7 @@ if [ -f ~/.aliases ]; then
 fi" >> "$PKG_NAME"-"$VERSION"/debian/skel.bashrc
 	
 	# Now, generate new changelog
-	cd "$PKG_NAME"-"$VERSION" && dch -n && cd ..
+	cd "$PKG_NAME"-"$VERSION" && dch -n -p && cd ..
 }
 
 # Build the package
