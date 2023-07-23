@@ -1,5 +1,11 @@
-ports
-=====
+Port
+====
+
+Ragnarok's port system. This should not be used. It will be restructured
+at some point, but there are more important things to be done first.
+
+Old Instructions
+================
 
 This is Ragnarok's ports system/tree.
 
